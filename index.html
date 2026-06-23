@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مراحل التجديد | Renewal Stages Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple:     #653165;
+  --purple-mid: #8a4a8a;
+  --purple-soft:#F3EAF3;
+  --purple-xsoft:#FAF4FA;
+  --teal:       #00A4A6;
+  --teal-soft:  #E6F7F7;
+  --teal-mid:   #007F80;
+  --gray-row:   #F7F7F7;
+  --line:       #E8E0E8;
+  --ink:        #1A1A2E;
+  --ink-2:      #3D3450;
+  --muted:      #7A6E84;
+  --white:      #FFFFFF;
+  --green:      #10b981;
+  --green-soft: #ecfdf5;
+  --yellow:     #f59e0b;
+  --yellow-soft:#fffbeb;
+  --orange:     #f97316;
+  --orange-soft:#fff7ed;
+  --red:        #ef4444;
+  --red-soft:   #fef2f2;
+  --blue:       #3b82f6;
+  --blue-soft:  #eff6ff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo', 'Inter', system-ui, sans-serif;
+  background: var(--gray-row);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ── Hero ─────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+  color: #fff;
+  padding: 48px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 15%, rgba(255,255,255,.12), transparent 55%);
+  pointer-events: none;
+}
+.hero .inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+.hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 6px; }
+.hero h2 { font-size: 16px; font-weight: 400; opacity: .85; margin-bottom: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.28);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Nav ──────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--purple-soft);
+  z-index: 100;
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav a {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap;
+  transition: all .15s;
+}
+.nav a:hover { color: var(--purple); }
+.nav a.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+/* ── Layout ───────────────────────────────────────────── */
+.page { max-width: 1100px; margin: 0 auto; padding: 32px 28px 60px; }
+
+/* ── Stage card ───────────────────────────────────────── */
+.stage-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 8px rgba(101,49,101,.06);
+}
+.stage-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--line);
+}
+.stage-badge {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+}
+.stage-head-text h3 { font-size: 20px; font-weight: 800; color: var(--purple); }
+.stage-head-text .en { font-size: 13px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+.stage-head-text .timing {
+  display: inline-block;
+  background: var(--teal-soft);
+  color: var(--teal-mid);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-top: 6px;
+}
+.stage-body { padding: 24px 28px; }
+.stage-desc {
+  color: var(--ink-2);
+  font-size: 14.5px;
+  margin-bottom: 22px;
+  padding: var(--teal-soft);
+  border-right: 4px solid var(--teal);
+  padding-right: 14px;
+}
+
+/* ── Two-col ──────────────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+@media (max-width: 860px) { .three-col { grid-template-columns: 1fr; } }
+
+/* ── Panel ────────────────────────────────────────────── */
+.panel {
+  background: var(--purple-xsoft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+.panel.teal { background: var(--teal-soft); border-color: rgba(0,164,166,.2); }
+.panel.white { background: var(--white); }
+.panel.warn { background: var(--yellow-soft); border-color: #fde68a; }
+.panel.danger { background: var(--red-soft); border-color: #fecaca; }
+.panel h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--purple);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel.teal h4 { color: var(--teal-mid); }
+.panel.warn h4 { color: #92400e; }
+.panel.danger h4 { color: #991b1b; }
+.panel h4 .ico {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  background: var(--purple);
+  color: #fff;
+}
+.panel.teal h4 .ico { background: var(--teal); }
+.panel.warn h4 .ico { background: var(--yellow); }
+.panel.danger h4 .ico { background: var(--red); }
+
+/* ── Sub stage chips ──────────────────────────────────── */
+.subs { display: flex; flex-wrap: wrap; gap: 8px; }
+.sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.sub.green  { background: var(--green-soft);  border-color: #a7f3d0; color: #065f46; }
+.sub.yellow { background: var(--yellow-soft); border-color: #fde68a; color: #92400e; }
+.sub.red    { background: var(--red-soft);    border-color: #fecaca; color: #991b1b; }
+.sub.blue   { background: var(--blue-soft);   border-color: #bfdbfe; color: #1d4ed8; }
+.sub.purple { background: var(--purple-soft); border-color: #d8b4d8; color: var(--purple); }
+.sub.teal   { background: var(--teal-soft);   border-color: #a5d8d8; color: var(--teal-mid); }
+
+/* ── Checklist ────────────────────────────────────────── */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 14px;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist .num {
+  flex: 0 0 auto;
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: var(--purple);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.panel.teal .checklist .num { background: var(--teal); }
+.panel.warn .checklist .num { background: var(--yellow); color: var(--ink); }
+.panel.danger .checklist .num { background: var(--red); }
+.checklist .ar { font-weight: 700; color: var(--ink); font-size: 14px; }
+.checklist .en { font-size: 12px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+/* ── Escalation block ─────────────────────────────────── */
+.escalation {
+  border: 2px solid #fca5a5;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.escalation-head {
+  background: var(--red-soft);
+  border-bottom: 1px solid #fecaca;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.escalation-head .ico {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 900;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.escalation-head h4 { color: #991b1b; font-size: 16px; font-weight: 800; }
+.escalation-body { background: #fff; padding: 18px 20px; }
+.esc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.esc-item {
+  background: var(--red-soft);
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.esc-item .esc-title { font-weight: 800; color: #991b1b; font-size: 13.5px; margin-bottom: 4px; }
+.esc-item .esc-en { font-size: 12px; color: #dc2626; font-weight: 500; }
+.esc-item .esc-desc { font-size: 12.5px; color: #7f1d1d; margin-top: 6px; line-height: 1.6; }
+
+/* ── Objections block ─────────────────────────────────── */
+.objections { margin-top: 20px; }
+.obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 10px; margin-top: 14px; }
+.obj-item {
+  background: var(--yellow-soft);
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.obj-item .obj-title { font-weight: 800; color: #92400e; font-size: 13.5px; margin-bottom: 4px; }
+.obj-item .obj-en { font-size: 12px; color: #b45309; font-weight: 500; }
+.obj-item .obj-res { font-size: 12.5px; color: #78350f; margin-top: 8px; line-height: 1.6; border-top: 1px dashed #fde68a; padding-top: 8px; }
+
+/* ── Tips box ─────────────────────────────────────────── */
+.tips {
+  background: linear-gradient(135deg, var(--purple-soft), var(--teal-soft));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 18px;
+}
+.tips h5 { font-size: 13px; font-weight: 800; color: var(--purple); margin-bottom: 10px; }
+.tips ul { list-style: none; }
+.tips ul li {
+  font-size: 13px;
+  color: var(--ink-2);
+  padding: 5px 0;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.tips ul li::before { content: "◀"; color: var(--teal); font-size: 10px; margin-top: 4px; flex: 0 0 auto; }
+
+/* ── Footer ───────────────────────────────────────────── */
+.footer { text-align: center; color: var(--muted); font-size: 13px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="inner">
+    <h1>مراحل التجديد ودليل الموظف</h1>
+    <h2>Renewal Stages — Agent Action Checklist</h2>
+    <div class="chips">
+      <span class="chip">رِواء | Rewaa</span>
+      <span class="chip">فريق التجديد | Renewal Team</span>
+      <span class="chip">٤ مراحل رئيسية</span>
+      <span class="chip">يشمل: التصعيد والاعتراضات</span>
+      <span class="chip">إصدار ١.٠ — يونيو ٢٠٢٦</span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#s1" class="active">١. التواصل</a>
+    <a href="#s2">٢. العرض المالي</a>
+    <a href="#s3">٣. تم التجديد</a>
+    <a href="#s4">٤. خسارة</a>
+    <a href="#escalation-sec">⚠ التصعيد</a>
+    <a href="#tags-sec">🏷 التاغات</a>
+  </div>
+</nav>
+
+<main class="page">
+
+  <!-- ══════════════════════════════════════════════════════
+       STAGE 1 — Communication / التواصل
+  ══════════════════════════════════════════════════════ -->
+  <section id="s1" class="stage-card">
+    <div class="stage-head">
+      <div class="stage-badge" style="background:linear-gradient(135deg,#653165,#8a4a8a)">١</div>
+      <div class="stage-head-text">
+        <h3>التواصل الأولي</h3>
+        <div class="en">Communication</div>
+        <span class="timing">قبل ١٠ أيام من انتهاء الاشتراك كحد أقصى</span>
+      </div>
+    </div>
+    <div class="stage-body">
+      <p class="stage-desc">
+        أول تواصل مع العميل قبل انتهاء اشتراكه. الهدف: لا نعطي العميل فرصة للبحث عن بدائل — نبادر نحن أولاً، نفهم وضعه، ونرشح الباقة المناسبة.
+      </p>
+
+      <div class="two-col" style="margin-bottom:18px">
+        <div class="panel">
+          <h4><span class="ico">◈</span>المراحل الفرعية | Sub Stages</h4>
+          <div class="subs">
+            <span class="sub yellow">لم يتم الرد — No Response</span>
+            <span class="sub blue">في انتظار السداد — Awaiting Payment</span>
+            <span class="sub yellow">مفاوضات مع العميل — Negotiation</span>
+            <span class="sub orange" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">حل مشكلة العميل — Resolving Issue</span>
+          </div>
+        </div>
+        <div class="panel teal">
+          <h4><span class="ico">✓</span>هدف المرحلة | Stage Goal</h4>
+          <ul class="checklist">
+            <li><span class="num">١</span><div><div class="ar">فهم وضع العميل الحالي واستخدامه للنظام</div><div class="en">Understand current usage & business status</div></div></li>
+            <li><span class="num">٢</span><div><div class="ar">ترشيح الباقة المناسبة بناءً على الاستخدام الفعلي</div><div class="en">Recommend the right package based on actual use</div></div></li>
+            <li><span class="num">٣</span><div><div class="ar">تحديد من يملك صلاحية القرار (صاحب القرار / محاسب / مدير)</div><div class="en">Identify the decision maker</div></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel white" style="border:1px solid var(--line)">
+        <h4><span class="ico">☑</span>ماذا يفعل الموظف | Agent Actions</h4>
+        <ul class="checklist">
+          <li><span class="num">١</span><div><div class="ar">راجع بيانات العميل في CRM قبل الاتصال — اعرف تاريخ الانتهاء، الباقة الحالية، عدد المستخدمين</div><div class="en">Review CRM data before calling — expiry date, current package, users</div></div></li>
+          <li><span class="num">٢</span><div><div class="ar">افتتح المكالمة باحترافية وعرّف بنفسك ودورك</div><div class="en">Open professionally and introduce your role</div></div></li>
+          <li><span class="num">٣</span><div><div class="ar">اسأل العميل عن الخصائص التي يستخدمها فعلاً — تنبّه لخصائص يستخدمها لم يذكرها</div><div class="en">Ask about features in use — flag unmentioned ones</div></div></li>
+          <li><span class="num">٤</span><div><div class="ar">تأكد من هوية المتصل: هل هو صاحب القرار؟ أم يحتاج موافقة إدارة عليا أو شريك؟</div><div class="en">Confirm: is this the decision maker or does approval is needed?</div></div></li>
+          <li><span class="num">٥</span><div><div class="ar">اسأل عن مدى رضاه عن الخدمة — إذا في شكوى أو مشكلة تقنية سجّلها وتابعها أولاً</div><div class="en">Ask about satisfaction — if there's an issue, resolve it first</div></div></li>
+          <li><span class="num">٦</span><div><div class="ar">حدّد الخطوة التالية بوضوح في نهاية المكالمة (إرسال عرض / تحديد موعد متابعة)</div><div class="en">Set a clear next step at the end of the call</div></div></li>
+          <li><span class="num">٧</span><div><div class="ar">حدّث Sub Stage في CRM فوراً بعد المكالمة</div><div class="en">Update Sub Stage in CRM immediately after the call</div></div></li>
+        </ul>
+      </div>
+
+      <!-- Objections in this stage -->
+      <div class="objections">
+        <div class="panel warn" style="margin-top:0">
+          <h4><span class="ico">!</span>اعتراضات شائعة في هذه المرحلة | Common Objections</h4>
+          <div class="obj-grid">
+            <div class="obj-item">
+              <div class="obj-title">السعر غالي</div>
+              <div class="obj-en">Price is too high</div>
+              <div class="obj-res">لا تدخل في نقاش السعر هنا — قدّم الباقة أولاً بقيمتها، واحفظ نقاش السعر للعرض المالي</div>
+            </div>
+            <div class="obj-item">
+              <div class="obj-title">ما عندي وقت / تواصل لاحقاً</div>
+              <div class="obj-en">I'm busy / call later</div>
+              <div class="obj-res">اتفق على موعد محدد واضبطه في CRM — لا تترك المكالمة مفتوحة بدون تاريخ</div>
+            </div>
+            <div class="obj-item">
+              <div class="obj-title">أنا مو المسؤول / الإدارة هي اللي تقرر</div>
+              <div class="obj-en">I'm not the decision maker</div>
+              <div class="obj-res">اطلب اسم المسؤول وطريقة للتواصل معه مباشرة — وثّقه في CRM</div>
+            </div>
+            <div class="obj-item">
+              <div class="obj-title">عندي مشكلة في النظام ما حُلّت</div>
+              <div class="obj-en">I have an unresolved issue</div>
+              <div class="obj-res">صعّد المشكلة أولاً وحددها — لا تتحدث عن التجديد قبل حل المشكلة</div>
+            </div>
+            <div class="obj-item">
+              <div class="obj-title">أنا شايف بديل / قارن مع شركات ثانية</div>
+              <div class="obj-en">I'm comparing with competitors</div>
+              <div class="obj-res">اسأل عن المنافس بالاسم — وثّقه، ثم ابرز نقاط التميز المحددة لرواء مقارنةً به</div>
+            </div>
+            <div class="obj-item">
+              <div class="obj-title">الاستخدام محدود / ما استفدنا كثير</div>
+              <div class="obj-en">We don't use it much</div>
+              <div class="obj-res">حدّد الخصائص غير المستخدمة وابرز قيمتها — اعرض جلسة تدريبية إذا لزم</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tips">
+        <h5>💡 نقاط مهمة في هذه المرحلة</h5>
+        <ul>
+          <li>لا تذكر السعر في المكالمة الأولى إلا إذا سأل العميل — الهدف الأول هو فهم الاحتياج</li>
+          <li>إذا ذكر العميل منافساً، سجّل الاسم في CRM — هذه معلومة استراتيجية</li>
+          <li>إذا العميل نشاطه مغلق أو متوقف، صعّد الحالة ولا تكمل في نقاش التجديد</li>
+          <li>الاتصال قبل ٥ أيام من الانتهاء هو الحد الأدنى — ١٠ أيام هو المثالي</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       STAGE 2 — Proposal Sent / العرض المالي
+  ══════════════════════════════════════════════════════ -->
+  <section id="s2" class="stage-card">
+    <div class="stage-head">
+      <div class="stage-badge" style="background:linear-gradient(135deg,#00A4A6,#007F80)">٢</div>
+      <div class="stage-head-text">
+        <h3>العرض المالي</h3>
+        <div class="en">Proposal Sent</div>
+        <span class="timing">بعد التواصل الأولي — متابعة خلال ١–٢ يوم</span>
+      </div>
+    </div>
+    <div class="stage-body">
+      <p class="stage-desc">
+        مرحلة تقديم العرض الرسمي ومتابعته. الهدف: ضمان وصول العرض، معرفة موقف العميل منه، والدفع نحو القرار.
+      </p>
+
+      <div class="two-col" style="margin-bottom:18px">
+        <div class="panel">
+          <h4><span class="ico">◈</span>المراحل الفرعية | Sub Stages</h4>
+          <div class="subs">
+            <span class="sub yellow">لم يتم الرد — No Response</span>
+            <span class="sub blue">في انتظار السداد — Awaiting Payment</span>
+            <span class="sub yellow">مفاوضات مع العميل — Negotiation</span>
+            <span class="sub orange" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">حل مشكلة العميل — Resolving Issue</span>
+          </div>
+        </div>
+        <div class="panel teal">
+          <h4><span class="ico">✓</span>هدف المرحلة | Stage Goal</h4>
+          <ul class="checklist">
+            <li><span class="num">١</span><div><div class="ar">التأكد من وصول العرض ومراجعته من قِبَل صاحب القرار</div><div class="en">Confirm the proposal reached the decision maker</div></div></li>
+            <li><span class="num">٢</span><div><div class="ar">أخذ موقف واضح: موافقة / تعديل / رفض</div><div class="en">Get a clear stance: approval / modification / rejection</div></div></li>
+            <li><span class="num">٣</span><div><div class="ar">إغلاق الصفقة أو تحديد خطوة واضحة للمضي قدماً</div><div class="en">Close or set a definitive next step</div></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel white" style="border:1px solid var(--line);margin-bottom:18px">
+        <h4><span class="ico">☑</span>ماذا يفعل الموظف | Agent Actions</h4>
+        <ul class="checklist">
+          <li><span class="num">١</span><div><div class="ar">أرسل العرض المالي خلال ٢٤ ساعة من المكالمة الأولى</div><div class="en">Send the proposal within 24 hours of the first call</div></div></li>
+          <li><span class="num">٢</span><div><div class="ar">تابع خلال ١–٢ يوم: هل وصل العرض؟ هل تمت مراجعته؟</div><div class="en">Follow up in 1–2 days: was the proposal received and reviewed?</div></div></li>
+          <li><span class="num">٣</span><div><div class="ar">إذا العرض رُفع للإدارة، حدّد متى سيكون القرار وسجّل الموعد</div><div class="en">If it went to management, set a decision deadline and log it</div></div></li>
+          <li><span class="num">٤</span><div><div class="ar">إذا العميل طلب تعديلاً على الباقة، حدّد نوع التعديل (ترقية / تخفيض / مستخدمين) قبل الموافقة</div><div class="en">If modification requested, clarify type before approving</div></div></li>
+          <li><span class="num">٥</span><div><div class="ar">في مكالمة الضغط (قبل يومين من الانتهاء): استخدم أسلوب الضغط المناسب</div><div class="en">In the pressure call (2 days before expiry): use the right pressure technique</div></div></li>
+          <li><span class="num">٦</span><div><div class="ar">لا تعد بخصم غير مصرح به — ارجع لمدير الفريق إذا لزم</div><div class="en">Never promise unauthorized discounts — refer to team lead if needed</div></div></li>
+          <li><span class="num">٧</span><div><div class="ar">حدّث Sub Stage في CRM بعد كل تواصل</div><div class="en">Update Sub Stage in CRM after every interaction</div></div></li>
+        </ul>
+      </div>
+
+      <!-- Pressure techniques -->
+      <div class="panel warn">
+        <h4><span class="ico">⚡</span>أساليب الضغط الثلاثة | 3 Pressure Techniques</h4>
+        <div class="three-col" style="margin-top:4px">
+          <div style="background:#fff;border:1px solid #fde68a;border-radius:10px;padding:14px">
+            <div style="font-weight:800;color:#92400e;font-size:14px;margin-bottom:6px">١. التخلي — Walk-away</div>
+            <div style="font-size:13px;color:#78350f;line-height:1.7">"الخصم ينتهي بكرة — بكيفك شوف اللي يناسبك، إحنا حاضرين"</div>
+            <div style="font-size:11.5px;color:#b45309;margin-top:8px">متى: العميل غير متأكد، لا ضغط مباشر</div>
+          </div>
+          <div style="background:#fff;border:1px solid #fde68a;border-radius:10px;padding:14px">
+            <div style="font-weight:800;color:#92400e;font-size:14px;margin-bottom:6px">٢. الإغلاق — Closure</div>
+            <div style="font-size:13px;color:#78350f;line-height:1.7">"لو انتهى هذا الخصم ما أقدر أعطيك إياه مرة ثانية"</div>
+            <div style="font-size:11.5px;color:#b45309;margin-top:8px">متى: العميل يتردد وعنده خصم فعلي</div>
+          </div>
+          <div style="background:#fff;border:1px solid #fde68a;border-radius:10px;padding:14px">
+            <div style="font-weight:800;color:#92400e;font-size:14px;margin-bottom:6px">٣. الزاوية — Corner</div>
+            <div style="font-size:13px;color:#78350f;line-height:1.7">"ترى النظام رح يوقف — رد العميل: مدّد لي الخصم"</div>
+            <div style="font-size:11.5px;color:#b45309;margin-top:8px">متى: العميل محتاج لكنه يتأخر — تحويل الضغط له</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tips" style="margin-top:18px">
+        <h5>💡 نقاط مهمة في هذه المرحلة</h5>
+        <ul>
+          <li>إذا العميل ذكر ميزانية محددة، سجّلها في CRM — تساعد في تحديد الباقة المناسبة</li>
+          <li>إذا العميل يقارن مع منافس، ابرز نقطة تميز رواء المحددة مقارنةً بذلك المنافس تحديداً</li>
+          <li>مكالمة الضغط قبل يومين إلزامية — سجّلها في CRM مسبقاً كـ Task</li>
+          <li>إذا العميل طلب مهلة للتفكير، حدّد تاريخاً واضحاً وسجّله — لا تترك "قريباً"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       STAGE 3 — Renewed / تم التجديد
+  ══════════════════════════════════════════════════════ -->
+  <section id="s3" class="stage-card">
+    <div class="stage-head">
+      <div class="stage-badge" style="background:linear-gradient(135deg,#10b981,#059669)">٣</div>
+      <div class="stage-head-text">
+        <h3>تم التجديد</h3>
+        <div class="en">Renew Done</div>
+        <span class="timing" style="background:var(--green-soft);color:#065f46">✓ إغلاق ناجح</span>
+      </div>
+    </div>
+    <div class="stage-body">
+      <p class="stage-desc">
+        العميل وافق على التجديد وأتمّ الدفع. الهدف: إغلاق الديل بشكل صحيح وتوثيق كل شيء في النظام.
+      </p>
+
+      <div class="panel white" style="border:1px solid var(--line)">
+        <h4><span class="ico" style="background:var(--green)">✓</span>ماذا يفعل الموظف | Agent Actions</h4>
+        <ul class="checklist">
+          <li><span class="num" style="background:var(--green)">١</span><div><div class="ar">تأكد من اكتمال عملية الدفع قبل إغلاق الديل</div><div class="en">Confirm payment is complete before closing the deal</div></div></li>
+          <li><span class="num" style="background:var(--green)">٢</span><div><div class="ar">حدّث الديل في CRM إلى "Renew Done" فوراً</div><div class="en">Update deal to "Renew Done" in CRM immediately</div></div></li>
+          <li><span class="num" style="background:var(--green)">٣</span><div><div class="ar">أرسل تأكيداً للعميل بالتجديد (WhatsApp / Email)</div><div class="en">Send renewal confirmation to the client</div></div></li>
+          <li><span class="num" style="background:var(--green)">٤</span><div><div class="ar">سجّل ملاحظة في CRM تتضمن: الباقة المجددة، المبلغ، تاريخ الانتهاء الجديد</div><div class="en">Log in CRM: renewed package, amount, new expiry date</div></div></li>
+          <li><span class="num" style="background:var(--green)">٥</span><div><div class="ar">أغلق المكالمة باحترافية وشكر العميل</div><div class="en">Close the call professionally and thank the client</div></div></li>
+        </ul>
+      </div>
+
+      <div class="tips" style="margin-top:18px">
+        <h5>💡 نقاط مهمة في هذه المرحلة</h5>
+        <ul>
+          <li>لا تغلق الديل قبل تأكيد الدفع — "الموافقة الشفهية" لا تكفي</li>
+          <li>إذا كان هناك خصم تم تقديمه، تأكد أنه موثق ومصرح به من مدير الفريق</li>
+          <li>سجّل في CRM أي معلومة مفيدة ذكرها العميل (رضاه، استخدامه، خططه)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       STAGE 4 — Lost / خسارة
+  ══════════════════════════════════════════════════════ -->
+  <section id="s4" class="stage-card">
+    <div class="stage-head">
+      <div class="stage-badge" style="background:linear-gradient(135deg,#ef4444,#dc2626)">٤</div>
+      <div class="stage-head-text">
+        <h3>خسارة العميل</h3>
+        <div class="en">Lost</div>
+        <span class="timing" style="background:var(--red-soft);color:#991b1b">✕ توثيق إلزامي قبل الإغلاق</span>
+      </div>
+    </div>
+    <div class="stage-body">
+      <p class="stage-desc">
+        العميل قرر عدم التجديد. الهدف: توثيق سبب الخسارة بدقة — هذه البيانات تساعد في تحسين الأداء مستقبلاً.
+      </p>
+
+      <div class="two-col" style="margin-bottom:18px">
+        <div class="panel danger">
+          <h4><span class="ico">✗</span>أسباب الخسارة الشائعة | Lost Reasons</h4>
+          <div class="subs">
+            <span class="sub red">السعر مرتفع — High Price</span>
+            <span class="sub red">إغلاق النشاط — Business Closed</span>
+            <span class="sub red">انتقل لمنافس — Moved to Competitor</span>
+            <span class="sub red">مشكلة تقنية غير محلولة — Unresolved Issue</span>
+            <span class="sub red">ميزة مفقودة — Missing Feature</span>
+            <span class="sub red">قرار إداري — Management Decision</span>
+            <span class="sub red">ميزانية محدودة — Budget Constraint</span>
+            <span class="sub red">استخدام محدود — Low Usage</span>
+          </div>
+        </div>
+        <div class="panel white" style="border:1px solid var(--line)">
+          <h4><span class="ico" style="background:var(--red)">☑</span>ماذا يفعل الموظف | Agent Actions</h4>
+          <ul class="checklist">
+            <li><span class="num" style="background:var(--red)">١</span><div><div class="ar">اسأل العميل عن سبب عدم التجديد بشكل مباشر ومحترم</div><div class="en">Ask directly and respectfully why they're not renewing</div></div></li>
+            <li><span class="num" style="background:var(--red)">٢</span><div><div class="ar">سجّل السبب الحقيقي في CRM — لا تكتب "السعر" إذا السبب فعلياً منافس</div><div class="en">Log the real reason — don't approximate</div></div></li>
+            <li><span class="num" style="background:var(--red)">٣</span><div><div class="ar">إذا ذكر منافساً، سجّل اسمه تحديداً</div><div class="en">If a competitor was mentioned, log the exact name</div></div></li>
+            <li><span class="num" style="background:var(--red)">٤</span><div><div class="ar">أغلق المكالمة باحترافية — العميل اليوم ممكن يرجع غداً</div><div class="en">Close professionally — today's lost client may return</div></div></li>
+            <li><span class="num" style="background:var(--red)">٥</span><div><div class="ar">حدّث الديل إلى "Lost" في CRM مع توثيق السبب</div><div class="en">Update to "Lost" in CRM with documented reason</div></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tips">
+        <h5>💡 نقاط مهمة في هذه المرحلة</h5>
+        <ul>
+          <li>لا تغلق الديل Lost قبل محاولة الإغلاق الأخيرة — تأكد أنك جرّبت الأساليب الثلاثة</li>
+          <li>إذا السبب مشكلة تقنية لم تُحل، صعّدها أولاً — قد تتحول خسارة لتجديد</li>
+          <li>توثيق السبب الحقيقي للخسارة مسؤولية تشغيلية — البيانات الخاطئة تضر بالتحليل</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       ESCALATION
+  ══════════════════════════════════════════════════════ -->
+  <section id="escalation-sec">
+    <div class="escalation" style="background:#fff">
+      <div class="escalation-head">
+        <div class="ico">!</div>
+        <h4>إجراءات التصعيد | Escalation Procedures</h4>
+      </div>
+      <div class="escalation-body">
+        <p style="color:#7f1d1d;font-size:14px;margin-bottom:16px">
+          في الحالات التالية يجب التصعيد لمدير الفريق (أبو بكر) فوراً قبل الاستمرار في أي نقاش مع العميل:
+        </p>
+        <div class="esc-grid">
+
+          <div class="esc-item">
+            <div class="esc-title">عميل كبير أو متعدد الفروع</div>
+            <div class="esc-en">Large / Multi-branch Client</div>
+            <div class="esc-desc">أي عميل بحجم يستدعي شروطاً أو خصومات خارج الصلاحية العادية</div>
+          </div>
+
+          <div class="esc-item">
+            <div class="esc-title">طلب خصم استثنائي</div>
+            <div class="esc-en">Exceptional Discount Request</div>
+            <div class="esc-desc">أي خصم خارج الصلاحيات المحددة — لا تعد بشيء قبل الرجوع للمدير</div>
+          </div>
+
+          <div class="esc-item">
+            <div class="esc-title">وعود من فريق المبيعات</div>
+            <div class="esc-en">Sales Team Promises</div>
+            <div class="esc-desc">إذا ذكر العميل وعداً قطعه له فريق المبيعات (سعر / ميزة / شرط) غير موثق — صعّد فوراً ولا تؤكد ولا تنفي</div>
+          </div>
+
+          <div class="esc-item">
+            <div class="esc-title">نقاش مطوّل بدون تقدم</div>
+            <div class="esc-en">Long Negotiation Without Progress</div>
+            <div class="esc-desc">إذا تجاوزت المفاوضات ٣ مكالمات بدون قرار — ادخل المدير في المحادثة</div>
+          </div>
+
+          <div class="esc-item">
+            <div class="esc-title">عميل غاضب أو موقف حساس</div>
+            <div class="esc-en">Angry Client / Sensitive Situation</div>
+            <div class="esc-desc">أي موقف يخرج عن نطاق التعامل المعتاد — لا تتصرف بمفردك</div>
+          </div>
+
+          <div class="esc-item">
+            <div class="esc-title">مشكلة تقنية معلقة تعيق التجديد</div>
+            <div class="esc-en">Pending Technical Issue Blocking Renewal</div>
+            <div class="esc-desc">إذا العميل يرفض التجديد بسبب مشكلة لم تُحل — صعّد للمدير ليتدخل مع الدعم الفني</div>
+          </div>
+
+        </div>
+
+        <div style="background:var(--red-soft);border:1px solid #fecaca;border-radius:10px;padding:14px;margin-top:16px">
+          <div style="font-weight:800;color:#991b1b;font-size:14px;margin-bottom:8px">⚠ وعود فريق المبيعات — تفصيل</div>
+          <p style="font-size:13.5px;color:#7f1d1d;line-height:1.7;margin:0">
+            إذا ذكر العميل في أي مرحلة أن فريق المبيعات وعده بـ: سعر مختلف، ميزة معينة، شرط في العقد، أو أي تعهد غير موثق في CRM — <strong>لا تؤكد ولا تنفي</strong>. قل للعميل: "سأتحقق من هذا وأعود إليك خلال [وقت محدد]" ثم صعّد فوراً لأبو بكر مع تفاصيل ما ذكره العميل كاملاً.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGS SECTION -->
+  <section id="tags-sec" style="margin-top:28px">
+    <div class="stage-card">
+      <div class="stage-head">
+        <div class="stage-badge" style="background:linear-gradient(135deg,#653165,#00A4A6)">🏷</div>
+        <div class="stage-head-text">
+          <h3>تاغات المكالمات</h3>
+          <div class="en">Call Tags</div>
+          <span class="timing">تُضاف أثناء المكالمة أو بعدها مباشرةً</span>
+        </div>
+      </div>
+      <div class="stage-body">
+        <p class="stage-desc">التاغات المقترحة التالية تُضاف على المكالمة أثناء التواصل مع العميل أو بعده مباشرةً، بهدف تسهيل تحليل المكالمات وتحديد أنماط الأداء.<br>
+        <span style="color:var(--muted);font-size:13px">The following tags are suggested to be added to each call during or immediately after customer interaction, to simplify call analysis and identify performance patterns.</span></p>
+        <div class="two-col">
+          <div>
+            <div class="panel" style="margin-bottom:14px">
+              <h4><span class="ico">👤</span>موقف العميل | Customer Status</h4>
+              <div class="subs">
+                <span class="sub green">مهتم بالتجديد</span>
+                <span class="sub yellow">يحتاج وقت للتفكير</span>
+                <span class="sub yellow">ينتظر قرار الإدارة</span>
+                <span class="sub yellow">يقارن مع منافس</span>
+                <span class="sub orange" style="background:#fff7ed;border-color:#fed7aa;color:#9a3412">غير راضٍ عن الخدمة</span>
+                <span class="sub red">نشاطه مغلق / متوقف</span>
+                <span class="sub red">لم يرد</span>
+              </div>
+            </div>
+            <div class="panel warn">
+              <h4><span class="ico">!</span>سبب التردد أو الرفض | Objection Type</h4>
+              <div class="subs">
+                <span class="sub yellow">السعر مرتفع</span>
+                <span class="sub yellow">ميزة مفقودة</span>
+                <span class="sub yellow">مشكلة تقنية معلقة</span>
+                <span class="sub yellow">استخدام محدود</span>
+                <span class="sub yellow">ميزانية محدودة</span>
+                <span class="sub yellow">قرار إداري</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="panel teal" style="margin-bottom:14px">
+              <h4><span class="ico">☑</span>إجراء الموظف | Agent Action</h4>
+              <div class="subs">
+                <span class="sub teal">أرسل عرض السعر</span>
+                <span class="sub teal">طلب تمديد الخصم</span>
+                <span class="sub teal">وعد بمتابعة</span>
+                <span class="sub red">صعّد للمدير</span>
+                <span class="sub red">وعود من المبيعات</span>
+                <span class="sub blue">حوّل لدعم فني</span>
+              </div>
+            </div>
+            <div class="panel white" style="border:1px solid var(--line)">
+              <h4><span class="ico" style="background:var(--purple)">◈</span>نتيجة المكالمة | Call Outcome</h4>
+              <div class="subs">
+                <span class="sub green">تم الإغلاق</span>
+                <span class="sub blue">متابعة مجدولة</span>
+                <span class="sub yellow">في انتظار السداد</span>
+                <span class="sub red">خسارة مؤكدة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>رِواء — فريق التجديد | إصدار ١.٠ — يونيو ٢٠٢٦</p>
+  <p style="margin-top:4px">صادر عن قسم ضمان الجودة | Issued by Quality Assurance</p>
+</footer>
+
+<script>
+const navLinks = document.querySelectorAll('.nav a');
+const sections = [...document.querySelectorAll('section[id]')];
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 140;
+  let cur = sections[0]?.id;
+  for (const s of sections) { if (s.offsetTop <= y) cur = s.id; }
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+navLinks.forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href');
+  if (id?.startsWith('#')) {
+    e.preventDefault();
+    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}));
+</script>
+</body>
+</html>
